@@ -1115,7 +1115,7 @@ function buildReceiptPDF(data) {
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(34);
   doc.setTextColor(20, 20, 20);
-  doc.text('RECIBO DE PAGO -  ' + data.alias, M, M + 10);
+  doc.text('RECIBO DE PAGO -  ' + String(data.alias || ''), M, M + 10);
 
   doc.setDrawColor(20, 20, 20);
   doc.setLineWidth(1);
@@ -1124,7 +1124,7 @@ function buildReceiptPDF(data) {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(10);
   doc.setTextColor(60, 60, 60);
-  doc.text(data.direccion, W / 2, M + 50, { align: 'center' });
+  doc.text(String(data.direccion || ''), W / 2, M + 50, { align: 'center' });
 
   const blockY = M + 80;
   doc.setFont('helvetica', 'bold');
@@ -1134,18 +1134,18 @@ function buildReceiptPDF(data) {
 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(11);
-  doc.text(data.inquilino, M, blockY + 18);
-  if (data.telefono) doc.text(data.telefono, M, blockY + 34);
+  doc.text(String(data.inquilino || ''), M, blockY + 18);
+  if (data.telefono) doc.text(String(data.telefono), M, blockY + 34);
 
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(13);
-  doc.text(data.numero, W - M, blockY, { align: 'right' });
-  doc.text(data.mes, W - M, blockY + 18, { align: 'right' });
+  doc.text(String(data.numero || ''), W - M, blockY, { align: 'right' });
+  doc.text(String(data.mes || ''), W - M, blockY + 18, { align: 'right' });
 
   const tableY = blockY + 65;
   const rows = data.conceptos.map(c => [
-    c.descripcion.toUpperCase(),
-    c.fecha,
+    String(c.descripcion || '').toUpperCase(),
+    String(c.fecha || ''),
     '$' + Number(c.monto).toLocaleString('es-MX'),
     '$' + Number(c.monto).toLocaleString('es-MX')
   ]);
@@ -1211,9 +1211,9 @@ function buildReceiptPDF(data) {
     doc.setFontSize(8);
     doc.setTextColor(110, 110, 110);
     let by = H - M - 38;
-    doc.text('Comprobante ' + (data.bancoOrigen || 'bancario'), M, by);
-    if (data.claveRastreo) { by += 11; doc.text('Clave de rastreo: ' + data.claveRastreo, M, by); }
-    if (data.numAutorizacion) { by += 11; doc.text('No. autorización: ' + data.numAutorizacion, M, by); }
+    doc.text('Comprobante ' + String(data.bancoOrigen || 'bancario'), M, by);
+    if (data.claveRastreo) { by += 11; doc.text('Clave de rastreo: ' + String(data.claveRastreo), M, by); }
+    if (data.numAutorizacion) { by += 11; doc.text('No. autorización: ' + String(data.numAutorizacion), M, by); }
   }
 
   if (data.pagado) {
