@@ -1,0 +1,2 @@
+# fidex
+Mi registradora
