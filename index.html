@@ -448,6 +448,158 @@
     h1 { font-size: 18px; }
   }
 
+
+  /* ============= LOGIN ============= */
+  .login-wrap {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .login-box {
+    width: 100%;
+    max-width: 360px;
+    border: 1px solid var(--border);
+    background: var(--bg-elev);
+    padding: 2rem 1.75rem;
+  }
+  .login-head {
+    text-align: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+  }
+  .login-head .brand { font-size: 22px; letter-spacing: 0.06em; }
+  .login-head .sub {
+    margin-top: 0.5rem;
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .login-foot {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+  .login-foot .blink::after { content: '_'; animation: blink 1s steps(2) infinite; color: var(--accent); }
+
+  body[data-auth="0"] header.topbar,
+  body[data-auth="0"] aside.sidebar,
+  body[data-auth="0"] #backdrop { display: none !important; }
+  body[data-auth="0"] { padding-left: 0 !important; }
+
+  /* ============= DASHBOARD ============= */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+    margin-bottom: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .kpi-tile {
+    border: 1px solid var(--border);
+    background: var(--bg-elev);
+    padding: 0.95rem;
+  }
+  .kpi-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.45rem;
+  }
+  .kpi-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1.2;
+  }
+  .kpi-sub {
+    font-size: 11px;
+    color: var(--text-dim);
+    margin-top: 0.3rem;
+  }
+
+  .chart-rows { display: flex; flex-direction: column; gap: 0.4rem; }
+  .chart-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 100px;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 12px;
+  }
+  .chart-row .ch-label { color: var(--text-dim); font-size: 11px; }
+  .chart-row .ch-bar-bg {
+    height: 18px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .chart-row .ch-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.3s;
+  }
+  .chart-row .ch-val { text-align: right; color: var(--text); font-size: 11px; }
+
+  /* ============= HISTORIAL ============= */
+  .hist-item {
+    border: 1px solid var(--border);
+    background: var(--bg-elev);
+    padding: 0.8rem 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+  .hist-item .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+  }
+  .hist-item .ttype {
+    color: var(--accent);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+  .hist-item .tnum { font-weight: 700; font-size: 13px; }
+  .hist-item .tamt { font-weight: 700; font-size: 13px; color: var(--accent); }
+  .hist-item .meta { font-size: 11px; color: var(--text-dim); margin-bottom: 0.4rem; }
+  .hist-item .actions {
+    display: flex; gap: 0.5rem; margin-top: 0.4rem;
+  }
+  .hist-item .actions a {
+    font-size: 11px;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--border);
+  }
+  .hist-item .actions a:hover { border-color: var(--accent); }
+
+  /* ============= SIDEBAR FOOTER (logout) ============= */
+  .sb-foot { display: flex; flex-direction: column; gap: 0.5rem; }
+  .sb-foot-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+  .sb-foot-row #sb-user { color: var(--text-dim); }
+  .sb-logout {
+    width: 100%;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    background: transparent;
+    padding: 0.45rem;
+    font-size: 11px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .sb-logout:hover { border-color: var(--error); color: var(--error); }
+
   /* ============= DESKTOP: SIDEBAR PERSISTENTE ============= */
   @media (min-width: 1024px) {
     aside.sidebar {
@@ -487,25 +639,57 @@
   </div>
   <nav class="sb-nav">
     <div class="sb-section">módulos</div>
-    <button class="sb-item active" data-view="recibo">recibo</button>
+    <button class="sb-item active" data-view="dashboard">dashboard</button>
+    <button class="sb-item" data-view="recibo">recibo</button>
+    <button class="sb-item" data-view="historial">historial</button>
+    <div class="sb-section">sistema</div>
     <button class="sb-item" data-view="inmuebles">inmuebles</button>
     <button class="sb-item" data-view="inquilinos">inquilinos</button>
-    <div class="sb-section">sistema</div>
     <button class="sb-item" data-view="ajustes">ajustes</button>
   </nav>
   <div class="sb-foot">
-    <div id="sb-version">v1.1</div>
+    <div class="sb-foot-row">
+      <span id="sb-version">v1.2</span>
+      <span id="sb-user"></span>
+    </div>
+    <button class="sb-logout" id="btn-logout">[ cerrar sesión ]</button>
   </div>
 </aside>
 
 <main>
   <section id="view-loading" class="view active">
     <div class="splash">
-      <pre id="loading-log">FIDEX v1.1
+      <pre id="loading-log">FIDEX v1.2
 booting...</pre>
       <span class="blink"></span>
     </div>
     <div class="log-panel" id="log-panel"></div>
+  </section>
+
+
+  <section id="view-login" class="view">
+    <div class="login-wrap">
+      <div class="login-box">
+        <div class="login-head">
+          <div class="brand">FID<i>EX</i></div>
+          <div class="sub">acceso restringido</div>
+        </div>
+        <form id="login-form">
+          <div class="field">
+            <label>usuario</label>
+            <input type="text" id="login-user" autocomplete="username" autocapitalize="off" required>
+          </div>
+          <div class="field">
+            <label>contraseña</label>
+            <input type="password" id="login-pass" autocomplete="current-password" required>
+          </div>
+          <button type="submit" class="btn-primary" id="btn-login">[ iniciar sesión ]</button>
+        </form>
+        <div class="login-foot">
+          <span class="blink"></span>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="view-recibo" class="view">
@@ -597,6 +781,24 @@ booting...</pre>
       </div>
 
       <button class="btn-primary" id="btn-generar">generar y guardar</button>
+    </div>
+  </section>
+
+
+  <section id="view-dashboard" class="view">
+    <h1>dashboard</h1>
+    <div class="kpi-grid" id="kpi-grid"></div>
+
+    <div class="section">
+      <div class="section-head">cobrado · últimos 6 meses</div>
+      <div class="section-body">
+        <div class="chart-rows" id="chart-rows"></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-head">actividad reciente</div>
+      <div class="section-body" id="dash-recent"></div>
     </div>
   </section>
 
@@ -771,6 +973,15 @@ booting...</pre>
       </div>
     </div>
   </section>
+
+  <section id="view-historial" class="view">
+    <div class="listbar">
+      <h1>historial</h1>
+      <button onclick="renderHistorial()">[refrescar]</button>
+    </div>
+    <div id="historial-list"><div class="empty">cargando...</div></div>
+  </section>
+
 </main>
 
 <div class="toast" id="toast"></div>
@@ -879,6 +1090,8 @@ function navigateTo(viewId) {
     b.classList.toggle('active', isActive);
   });
 
+  if (viewId === 'dashboard') renderDashboard();
+  if (viewId === 'historial') renderHistorial();
   if (viewId === 'inmuebles') renderInmuebles();
   if (viewId === 'inquilinos') renderInquilinos();
   if (viewId === 'ajustes') renderAjustes();
@@ -899,6 +1112,73 @@ function closeSidebar() {
 }
 
 // ============= INIT =============
+// ============= SESSION =============
+function checkSession() {
+  try {
+    const raw = localStorage.getItem('fidex_session');
+    if (!raw) return null;
+    const session = JSON.parse(raw);
+    if (Date.now() > session.expiresAt) {
+      localStorage.removeItem('fidex_session');
+      return null;
+    }
+    return session;
+  } catch (e) {
+    return null;
+  }
+}
+
+function saveSession(user, token) {
+  const session = {
+    user: user,
+    token: token,
+    expiresAt: Date.now() + 7 * 24 * 60 * 60 * 1000  // 7 días
+  };
+  localStorage.setItem('fidex_session', JSON.stringify(session));
+}
+
+function logout() {
+  localStorage.removeItem('fidex_session');
+  location.reload();
+}
+window.logout = logout;
+
+async function tryLogin() {
+  const user = $('#login-user').value.trim();
+  const pass = $('#login-pass').value;
+  if (!user || !pass) { toast('faltan credenciales', 'error'); return; }
+
+  const btn = $('#btn-login');
+  btn.disabled = true;
+  btn.textContent = 'verificando...';
+  setStatus('login', 'busy');
+
+  try {
+    const result = await callBackend('login', user, pass);
+    saveSession(result.user, result.sessionToken);
+    document.body.dataset.auth = '1';
+    setStatus('ready', 'ok');
+    toast('bienvenido', 'success');
+    bootstrap();
+  } catch (e) {
+    toast(e.message || 'error', 'error');
+    setStatus('error', 'err');
+    $('#login-pass').value = '';
+    $('#login-pass').focus();
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '[ iniciar sesión ]';
+  }
+}
+
+function showLogin() {
+  document.body.dataset.auth = '0';
+  $$('.view').forEach(v => v.classList.remove('active'));
+  $('#view-login').classList.add('active');
+  setStatus('login required', 'busy');
+  setTimeout(() => $('#login-user').focus(), 100);
+}
+
 function startApp() {
   log('script started');
   log('readyState: ' + document.readyState);
@@ -908,6 +1188,22 @@ function startApp() {
     return;
   }
   log('API_URL configurada', 'ok');
+
+  // Setup login form siempre (independiente de auth)
+  $('#login-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    tryLogin();
+  });
+
+  // Verificar sesión
+  const session = checkSession();
+  if (!session) {
+    log('sin sesión, mostrando login');
+    showLogin();
+    return;
+  }
+  log('sesión activa: ' + session.user, 'ok');
+  document.body.dataset.auth = '1';
   bootstrap();
 }
 
@@ -929,11 +1225,13 @@ async function bootstrap() {
     STATE.inquilinos = data.inquilinos || [];
 
     $('#app-version').textContent = STATE.config['app_version'] || '1.0';
-    $('#sb-version').textContent = 'v1.1';
+    $('#sb-version').textContent = 'v1.2';
 
     initEvents();
     refreshReciboView();
-    navigateTo('recibo');
+    const session = checkSession();
+    if (session) $('#sb-user').textContent = session.user;
+    navigateTo('dashboard');
     setStatus('ready', 'ok');
   } catch (e) {
     const msg = (e && e.message) ? e.message : String(e);
@@ -968,6 +1266,11 @@ function initEvents() {
   $('#btn-generar').addEventListener('click', generarRecibo);
   $('#btn-guardar-inmueble').addEventListener('click', guardarInmueble);
   $('#btn-guardar-inquilino').addEventListener('click', guardarInquilino);
+
+  // Logout
+  $('#btn-logout').addEventListener('click', () => {
+    if (confirm('¿Cerrar sesión?')) logout();
+  });
 
   // Cerrar sidebar con Escape
   document.addEventListener('keydown', (e) => {
@@ -1127,131 +1430,185 @@ function buildReceiptPDF(data) {
   const H = doc.internal.pageSize.getHeight();
   const M = 50;
 
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(34);
+  doc.setFont('courier', 'normal');
   doc.setTextColor(20, 20, 20);
-  doc.text('RECIBO DE PAGO -  ' + String(data.alias || ''), M, M + 10);
 
-  doc.setDrawColor(20, 20, 20);
-  doc.setLineWidth(1);
-  doc.line(M, M + 30, W - M, M + 30);
+  function lineDouble(y) {
+    doc.setDrawColor(20, 20, 20);
+    doc.setLineWidth(0.6);
+    doc.line(M, y, W - M, y);
+    doc.line(M, y + 2.5, W - M, y + 2.5);
+  }
+  function lineSingle(y, color) {
+    doc.setDrawColor(color || 100);
+    doc.setLineWidth(0.4);
+    doc.line(M, y, W - M, y);
+  }
 
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(10);
-  doc.setTextColor(60, 60, 60);
-  doc.text(String(data.direccion || ''), W / 2, M + 50, { align: 'center' });
+  let y = M + 4;
 
-  const blockY = M + 80;
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(13);
-  doc.setTextColor(20, 20, 20);
-  doc.text('CLIENTE :', M, blockY);
+  // ===== TOP BAR =====
+  lineDouble(y);
+  y += 22;
 
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(11);
-  doc.text(String(data.inquilino || ''), M, blockY + 18);
-  if (data.telefono) doc.text(String(data.telefono), M, blockY + 34);
-
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(13);
-  doc.text(String(data.numero || ''), W - M, blockY, { align: 'right' });
-  doc.text(String(data.mes || ''), W - M, blockY + 18, { align: 'right' });
-
-  const tableY = blockY + 65;
-  const rows = data.conceptos.map(c => [
-    String(c.descripcion || '').toUpperCase(),
-    String(c.fecha || ''),
-    '$' + Number(c.monto).toLocaleString('es-MX'),
-    '$' + Number(c.monto).toLocaleString('es-MX')
-  ]);
-
-  doc.autoTable({
-    startY: tableY,
-    head: [['Descripción', 'Fecha', 'Precio MXN', 'Total']],
-    body: rows,
-    theme: 'plain',
-    margin: { left: M, right: M },
-    styles: {
-      font: 'helvetica', fontSize: 11,
-      cellPadding: { top: 12, right: 10, bottom: 12, left: 10 },
-      lineColor: [20, 20, 20], lineWidth: 0.5,
-      textColor: [30, 30, 30]
-    },
-    headStyles: {
-      fontStyle: 'bold', fontSize: 12,
-      lineWidth: { bottom: 1 }, lineColor: [20, 20, 20]
-    },
-    columnStyles: {
-      0: { cellWidth: 'auto' },
-      1: { halign: 'center', cellWidth: 130 },
-      2: { halign: 'center', cellWidth: 130 },
-      3: { halign: 'center', cellWidth: 130 }
-    },
-    didDrawCell: function(d) {
-      if (d.section === 'head' && d.column.index < 3) {
-        doc.setDrawColor(20, 20, 20);
-        doc.setLineWidth(0.5);
-        const x = d.cell.x + d.cell.width;
-        doc.line(x, d.cell.y + 8, x, d.cell.y + d.cell.height - 8);
-      }
-    }
-  });
-
-  const finalY = doc.lastAutoTable.finalY;
-
-  const subY = finalY + 30;
-  const subBoxX = W - M - 270;
-  const subBoxW = 270, subBoxH = 50;
-  doc.setDrawColor(20, 20, 20);
-  doc.setLineWidth(1);
-  doc.rect(subBoxX, subY, subBoxW, subBoxH);
-  doc.line(subBoxX + 130, subY + 10, subBoxX + 130, subY + subBoxH - 10);
-
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(11);
-  doc.text('Subtotal', subBoxX + 65, subY + subBoxH / 2 + 4, { align: 'center' });
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(13);
-  doc.text('$' + Number(data.total).toLocaleString('es-MX') + ' MXN', subBoxX + 200, subY + subBoxH / 2 + 4, { align: 'center' });
-
-  doc.setFont('helvetica', 'bold');
+  doc.setFont('courier', 'bold');
   doc.setFontSize(16);
+  doc.text('FIDEX  ::  RECIBO DE PAGO', W / 2, y, { align: 'center' });
+  y += 18;
+
+  lineDouble(y);
+  y += 26;
+
+  // ===== DATOS =====
+  doc.setFontSize(10);
+  doc.setFont('courier', 'bold');
+  doc.text('No. recibo:', M, y);
+  doc.setFont('courier', 'normal');
+  doc.text(String(data.numero || ''), M + 90, y);
+
+  doc.setFont('courier', 'bold');
+  doc.text('Mes:', M + 380, y);
+  doc.setFont('courier', 'normal');
+  doc.text(String(data.mes || ''), M + 430, y);
+  y += 14;
+
+  doc.setFont('courier', 'bold');
+  doc.text('Fecha:', M, y);
+  doc.setFont('courier', 'normal');
+  const today = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  doc.text(today, M + 90, y);
+
+  doc.setFont('courier', 'bold');
+  doc.text('Inmueble:', M + 380, y);
+  doc.setFont('courier', 'normal');
+  doc.text(String(data.alias || ''), M + 450, y);
+  y += 14;
+
+  doc.setFont('courier', 'bold');
+  doc.text('Dirección:', M, y);
+  doc.setFont('courier', 'normal');
+  const addrLines = doc.splitTextToSize(String(data.direccion || ''), W - 2 * M - 90);
+  doc.text(addrLines, M + 90, y);
+  y += 14 * addrLines.length + 8;
+
+  // ===== CLIENTE =====
+  lineSingle(y);
+  y += 13;
+  doc.setFont('courier', 'bold');
+  doc.setFontSize(11);
+  doc.text('  CLIENTE', M, y);
+  y += 6;
+  lineSingle(y);
+  y += 16;
+
+  doc.setFont('courier', 'normal');
+  doc.setFontSize(10);
+  doc.text(String(data.inquilino || ''), M + 16, y);
+  y += 14;
+  if (data.telefono) {
+    doc.setFont('courier', 'bold');
+    doc.text('Teléfono:', M + 16, y);
+    doc.setFont('courier', 'normal');
+    doc.text(String(data.telefono), M + 86, y);
+    y += 14;
+  }
+  y += 6;
+
+  // ===== CONCEPTOS =====
+  lineSingle(y);
+  y += 13;
+  doc.setFont('courier', 'bold');
+  doc.setFontSize(11);
+  doc.text('  CONCEPTOS', M, y);
+  y += 6;
+  lineSingle(y);
+  y += 16;
+
+  doc.setFont('courier', 'bold');
+  doc.setFontSize(9);
+  doc.setTextColor(120, 120, 120);
+  doc.text('DESCRIPCION', M + 16, y);
+  doc.text('FECHA', M + 380, y);
+  doc.text('MONTO', W - M - 16, y, { align: 'right' });
+  y += 12;
+
   doc.setTextColor(20, 20, 20);
-  doc.text('¡GRACIAS!', W - M, H - M - 10, { align: 'right' });
-  doc.setLineWidth(1);
-  doc.line(W - M - 110, H - M, W - M, H - M);
+  doc.setFont('courier', 'normal');
+  doc.setFontSize(10);
+  data.conceptos.forEach(c => {
+    const desc = String(c.descripcion || '').toUpperCase();
+    const fecha = String(c.fecha || '');
+    const monto = '$' + Number(c.monto).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    doc.text(desc, M + 16, y);
+    doc.text(fecha, M + 380, y);
+    doc.text(monto, W - M - 16, y, { align: 'right' });
+    y += 14;
+  });
+  y += 4;
 
-  if (data.claveRastreo || data.numAutorizacion || data.bancoOrigen) {
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(110, 110, 110);
-    let by = H - M - 38;
-    doc.text('Comprobante ' + String(data.bancoOrigen || 'bancario'), M, by);
-    if (data.claveRastreo) { by += 11; doc.text('Clave de rastreo: ' + String(data.claveRastreo), M, by); }
-    if (data.numAutorizacion) { by += 11; doc.text('No. autorización: ' + String(data.numAutorizacion), M, by); }
+  // Total separator
+  doc.setDrawColor(20, 20, 20);
+  doc.setLineWidth(0.5);
+  doc.line(W - M - 200, y, W - M, y);
+  y += 14;
+
+  doc.setFont('courier', 'bold');
+  doc.setFontSize(12);
+  doc.text('TOTAL', W - M - 200, y);
+  const totalStr = '$' + Number(data.total).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' MXN';
+  doc.text(totalStr, W - M, y, { align: 'right' });
+  y += 22;
+
+  // ===== COMPROBANTE (opcional) =====
+  if (data.bancoOrigen || data.claveRastreo || data.numAutorizacion) {
+    lineSingle(y);
+    y += 13;
+    doc.setFont('courier', 'bold');
+    doc.setFontSize(11);
+    const bancoTitle = '  COMPROBANTE' + (data.bancoOrigen ? ' ' + String(data.bancoOrigen).toUpperCase() : '');
+    doc.text(bancoTitle, M, y);
+    y += 6;
+    lineSingle(y);
+    y += 16;
+
+    doc.setFont('courier', 'normal');
+    doc.setFontSize(10);
+    if (data.claveRastreo) {
+      doc.setFont('courier', 'bold');
+      doc.text('Clave de rastreo:', M + 16, y);
+      doc.setFont('courier', 'normal');
+      doc.text(String(data.claveRastreo), M + 160, y);
+      y += 14;
+    }
+    if (data.numAutorizacion) {
+      doc.setFont('courier', 'bold');
+      doc.text('No. autorización:', M + 16, y);
+      doc.setFont('courier', 'normal');
+      doc.text(String(data.numAutorizacion), M + 160, y);
+      y += 14;
+    }
   }
 
+  // ===== ESTADO PAGO (parte inferior, centrado, grande) =====
+  const stampY = H - M - 50;
+  doc.setFont('courier', 'bold');
+  doc.setFontSize(28);
   if (data.pagado) {
-    doc.saveGraphicsState();
-    doc.setTextColor(196, 69, 58);
-    doc.setGState(new doc.GState({ opacity: 0.55 }));
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(110);
-    const cx = W / 2, cy = tableY + 110;
-    doc.text('PAGADO', cx, cy, { align: 'center', angle: 18 });
-    doc.setDrawColor(196, 69, 58);
-    doc.setLineWidth(4);
-    const tw = 280, th = 90;
-    const rad = (-18 * Math.PI) / 180;
-    const cs = Math.cos(rad), sn = Math.sin(rad);
-    const corners = [[-tw/2,-th/2],[tw/2,-th/2],[tw/2,th/2],[-tw/2,th/2]]
-      .map(p => [cx + p[0] * cs - p[1] * sn, cy - 30 + p[0] * sn + p[1] * cs]);
-    doc.line(corners[0][0], corners[0][1], corners[1][0], corners[1][1]);
-    doc.line(corners[1][0], corners[1][1], corners[2][0], corners[2][1]);
-    doc.line(corners[2][0], corners[2][1], corners[3][0], corners[3][1]);
-    doc.line(corners[3][0], corners[3][1], corners[0][0], corners[0][1]);
-    doc.restoreGraphicsState();
+    doc.setTextColor(45, 145, 75);  // verde
+    doc.text('[  PAGADO  ]', W / 2, stampY, { align: 'center' });
+  } else {
+    doc.setTextColor(196, 69, 58);  // rojo
+    doc.text('[  NO PAGADO  ]', W / 2, stampY, { align: 'center' });
   }
+
+  // ===== FOOTER =====
+  doc.setTextColor(20, 20, 20);
+  lineDouble(H - M - 22);
+  doc.setFont('courier', 'normal');
+  doc.setFontSize(9);
+  doc.setTextColor(120, 120, 120);
+  doc.text('FIDEX // ' + (data.alias || '') + ' // generado ' + today, M, H - M - 8);
+  doc.text('¡GRACIAS!', W - M, H - M - 8, { align: 'right' });
 
   return doc.output('datauristring').split(',')[1];
 }
@@ -1551,6 +1908,115 @@ function renderAjustes() {
     '<div style="padding: 0.3rem 0"><a href="' + baseSheet + c['sheet_id'] + '" target="_blank">&gt; DB (sheets)</a></div>';
   renderLog();
 }
+
+
+// ============= DASHBOARD =============
+async function renderDashboard() {
+  const kpiEl = $('#kpi-grid');
+  const chartEl = $('#chart-rows');
+  const recentEl = $('#dash-recent');
+  kpiEl.innerHTML = '<div class="kpi-tile"><div class="kpi-label">cargando...</div></div>';
+  chartEl.innerHTML = '<div class="text-muted">cargando...</div>';
+  recentEl.innerHTML = '<div class="text-muted">cargando...</div>';
+
+  try {
+    const data = await callBackend('getDashboardData');
+
+    // KPIs
+    kpiEl.innerHTML =
+      '<div class="kpi-tile">' +
+        '<div class="kpi-label">cobrado · este mes</div>' +
+        '<div class="kpi-value">' + fmtMoney(data.totalMes) + '</div>' +
+        '<div class="kpi-sub">' + (data.countMes || 0) + ' recibo(s)</div>' +
+      '</div>' +
+      '<div class="kpi-tile">' +
+        '<div class="kpi-label">cobrado · este año</div>' +
+        '<div class="kpi-value">' + fmtMoney(data.totalAno) + '</div>' +
+        '<div class="kpi-sub">' + (data.countAno || 0) + ' recibo(s)</div>' +
+      '</div>' +
+      '<div class="kpi-tile">' +
+        '<div class="kpi-label">inmuebles activos</div>' +
+        '<div class="kpi-value">' + (data.inmueblesActivos || 0) + '</div>' +
+        '<div class="kpi-sub">total: ' + (data.totalRecibos || 0) + ' recibos</div>' +
+      '</div>' +
+      '<div class="kpi-tile">' +
+        '<div class="kpi-label">inquilinos activos</div>' +
+        '<div class="kpi-value">' + (data.inquilinosActivos || 0) + '</div>' +
+        '<div class="kpi-sub">&nbsp;</div>' +
+      '</div>';
+
+    // Chart bars
+    const max = Math.max.apply(null, data.last6Months.map(m => m.total).concat([1]));
+    chartEl.innerHTML = data.last6Months.map(m => {
+      const pct = max > 0 ? Math.round((m.total / max) * 100) : 0;
+      return '<div class="chart-row">' +
+        '<div class="ch-label">' + m.label + '</div>' +
+        '<div class="ch-bar-bg"><div class="ch-bar-fill" style="width:' + pct + '%"></div></div>' +
+        '<div class="ch-val">' + fmtMoney(m.total) + '</div>' +
+      '</div>';
+    }).join('');
+
+    // Recientes
+    if (!data.recientes.length) {
+      recentEl.innerHTML = '<div class="text-muted">sin actividad</div>';
+    } else {
+      recentEl.innerHTML = data.recientes.map(r =>
+        '<div class="hist-item">' +
+          '<div class="top">' +
+            '<span class="tnum">' + r.numero + '</span>' +
+            '<span class="tamt">' + fmtMoney(r.total) + '</span>' +
+          '</div>' +
+          '<div class="meta">' + r.inquilino + ' · ' + r.inmueble + ' · ' + fmtDate(r.fecha) + '</div>' +
+          (r.pdfUrl ? '<div class="actions"><a href="' + r.pdfUrl + '" target="_blank">[ ver pdf ]</a></div>' : '') +
+        '</div>'
+      ).join('');
+    }
+  } catch (e) {
+    kpiEl.innerHTML = '<div class="text-muted">error: ' + (e.message || e) + '</div>';
+    chartEl.innerHTML = '';
+    recentEl.innerHTML = '';
+  }
+}
+
+// ============= HISTORIAL =============
+async function renderHistorial() {
+  const list = $('#historial-list');
+  list.innerHTML = '<div class="empty">cargando...</div>';
+  try {
+    const items = await callBackend('listHistorial', 100);
+    if (!items.length) {
+      list.innerHTML = '<div class="empty"><p>sin registros</p></div>';
+      return;
+    }
+    list.innerHTML = items.map(r =>
+      '<div class="hist-item">' +
+        '<div class="top">' +
+          '<div>' +
+            '<span class="ttype">' + r.tipo + '</span> &nbsp; ' +
+            '<span class="tnum">' + r.numero + '</span>' +
+          '</div>' +
+          '<span class="tamt">' + fmtMoney(r.total) + '</span>' +
+        '</div>' +
+        '<div class="meta">' +
+          '[' + r.inmuebleAlias + '] · ' + r.inquilinoNombre + ' · ' + (r.mes || '') +
+        '</div>' +
+        '<div class="meta">emitido ' + fmtDate(r.fecha) + (r.claveRastreo ? ' · clave ' + r.claveRastreo : '') + '</div>' +
+        (r.pdfUrl ? '<div class="actions"><a href="' + r.pdfUrl + '" target="_blank">[ ver pdf ]</a></div>' : '') +
+      '</div>'
+    ).join('');
+  } catch (e) {
+    list.innerHTML = '<div class="empty">error: ' + (e.message || e) + '</div>';
+  }
+}
+
+function fmtDate(iso) {
+  if (!iso) return '—';
+  try {
+    const d = new Date(iso);
+    return d.toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
+  } catch (e) { return String(iso); }
+}
+
 </script>
 </body>
 </html>
